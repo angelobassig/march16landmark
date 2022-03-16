@@ -1,0 +1,165 @@
+<div class="card p-4" style="width: 40%">
+  <h3 class="card-title text-center mb-4">Register</h3>
+  <form
+    [formGroup]="registerForm"
+    (ngSubmit)="onSubmit()"
+    class="d-grid gap-3 needs-validation"
+  >
+    <div class="row">
+      <div class="form-group col">
+        <label for="firstName" class="form-label">First Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="firstName"
+          formControlName="firstName"
+          required
+          [ngClass]="{
+            '': !submitted,
+            'is-invalid':
+              (submitted && firstName?.invalid) ||
+              (firstName?.dirty && firstName?.invalid),
+            'is-valid': firstName?.valid
+          }"
+        />
+        <span *ngIf="firstName?.errors?.['required'] " class="invalid-feedback">
+          This field is required
+        </span>
+      </div>
+      <div class="col form-group">
+        <label for="lastName" class="form-label">Last Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="lastName"
+          formControlName="lastName"
+          required
+          [ngClass]="{
+            '': !submitted,
+            'is-invalid':
+              (submitted && lastName?.invalid) ||
+              (lastName?.dirty && lastName?.invalid),
+            'is-valid': lastName?.valid
+          }"
+        />
+        <span *ngIf="lastName?.errors?.['required'] " class="invalid-feedback">
+          This field is required
+        </span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="email" class="form-label">Email</label>
+      <div class="input-group">
+        <span class="input-group-text">@</span>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          formControlName="email"
+          required
+          [ngClass]="{
+            '': !submitted,
+            'is-invalid':
+              (submitted && email?.invalid) || (email?.dirty && email?.invalid),
+            'is-valid': email?.valid
+          }"
+        />
+        <span *ngIf="email?.errors?.['required'] " class="invalid-feedback">
+          This field is required
+        </span>
+        <span *ngIf="email?.errors?.['email'] " class="invalid-feedback">
+          Invalid email format
+        </span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="mobileNumber" class="form-label">Mobile Number</label>
+      <div class="input-group">
+        <span class="input-group-text">+63</span>
+        <input
+          type="tel"
+          class="form-control"
+          id="mobileNumber"
+          formControlName="mobileNumber"
+        />
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="password" class="form-label">Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        formControlName="password"
+        required
+        [ngClass]="{
+          '': !submitted,
+          'is-invalid':
+            (submitted && password?.invalid) ||
+            (password?.dirty && password?.invalid),
+          'is-valid': password?.valid
+        }"
+      />
+      <span *ngIf="password?.errors?.['required'] " class="invalid-feedback">
+        This field is required
+      </span>
+      <span *ngIf="password?.errors?.['minlength'] " class="invalid-feedback">
+        Password should be atleast 8 characters
+      </span>
+    </div>
+    <div class="row">
+      <div class="form-group col">
+        <label for="birthday" class="form-label">Birthday</label>
+        <input
+          type="date"
+          class="form-control"
+          id="birthday"
+          formControlName="birthday"
+          required
+          [ngClass]="{
+            '': !submitted,
+            'is-invalid':
+              (submitted && birthday?.invalid) ||
+              (birthday?.dirty && birthday?.invalid),
+            'is-valid': birthday?.valid
+          }"
+        />
+        <span *ngIf="birthday?.errors?.['required']" class="invalid-feedback">
+          This field is required
+        </span>
+      </div>
+      <div class="col">
+        <label for="gender" class="form-label">Gender</label>
+        <select
+          class="form-select"
+          type="gender"
+          id="gender"
+          formControlName="gender"
+          aria-label="Default select example"
+        >
+          <option selected>Select Gender</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="others">Others</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="d-grid mt-3">
+      <button type="submit" class="btn btn-primary" [disabled]="isLoading">
+        <span
+          *ngIf="isLoading"
+          class="spinner-border spinner-border-sm"
+          role="status"
+          aria-hidden="true"
+        ></span>
+        {{ isLoading ? "Creating account..." : "Register" }}
+      </button>
+    </div>
+  </form>
+  <hr class="my-4" />
+  <p class="text-center">
+    Already have an account?<br />
+    <a class="link-primary" routerLink="/login">Log In.</a>
+  </p>
+</div>
